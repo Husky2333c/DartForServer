@@ -1,5 +1,5 @@
 // https://dart.cn/guides/language/language-tour#variables
-void variables() {
+void variablesTest() {
   var name = 'Bob';
   int? lineCount;
   assert(lineCount == null);
@@ -135,9 +135,160 @@ void variables() {
   // Check for NaN.
   var iMeantToDoThis = 0 / 0;
   assert(iMeantToDoThis.isNaN);
+
+  var list1 = [
+    'Car',
+    'Boat',
+    'Plane',
+  ];
+
+  assert(list.length == 3);
+  assert(list[1] == 2);
+
+  //list[1] = 1;
+  assert(list[1] == 1);
+
+  var list2 = [0, ...list];
+  assert(list2.length == 4);
+
+  var nav = ['Home', 'Furniture', 'Plants', if (false) 'Outlet'];
+
+  var listOfInts = [1, 2, 3];
+  var listOfStrings = ['#0', for (var i in listOfInts) '#$i'];
+  assert(listOfStrings[1] == '#1');
+
+  var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
+
+  var elements = <String>{};
+  elements.add('fluorine');
+  elements.addAll(halogens);
+
+  assert(elements.length == 5);
+
+  final constantSet = const {
+    'fluorine',
+    'chlorine',
+    'bromine',
+    'iodine',
+    'astatine',
+  };
+  print(constantSet);
+
+  var gifts = {
+    // Key:    Value
+    'first': 'partridge',
+    'second': 'turtledoves',
+    'fifth': 'golden rings'
+  };
+
+  var nobleGases = {
+    2: 'helium',
+    10: 'neon',
+    18: 'argon',
+  };
+
+  var gifts1 = Map<String, String>();
+  gifts['first'] = 'partridge';
+  gifts['second'] = 'turtledoves';
+  gifts['fifth'] = 'golden rings';
+
+  var nobleGases1 = Map<int, String>();
+  nobleGases[2] = 'helium';
+  nobleGases[10] = 'neon';
+  nobleGases[18] = 'argon';
+
+  var gifts2 = {'first': 'partridge'};
+  gifts['fourth'] = 'calling birds'; // Add a key-value pair
+
+  var gifts3 = {'first': 'partridge'};
+  assert(gifts['fifth'] == null);
+
+  var hi = 'Hi 🇩🇰';
+  print(hi);
+  print('The end of the string: ${hi.substring(hi.length - 1)}');
+}
+
+// https://dart.cn/guides/language/language-tour#functions
+void FunctionTest() {
+  void printElement(int element) {
+    print(element);
+  }
+
+  var list = [1, 2, 3];
+
+  // Pass printElement as a parameter.
+  list.forEach(printElement);
+
+  Function makeAdder(int addBy) {
+    return (int i) => addBy + i;
+  }
+
+  print(makeAdder(5));
+
+  fool() {}
+
+  assert(fool() == null);
+}
+
+// https://dart.cn/guides/language/language-tour#operators
+void OperatorTest() {
+  assert(2 + 3 == 5);
+  assert(2 - 3 == -1);
+  assert(2 * 3 == 6);
+  assert(5 / 2 == 2.5); // Result is a double
+  assert(5 ~/ 2 == 2); // Result is an int
+  assert(5 % 2 == 1); // Remainder
+
+  assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
+
+  assert(2 == 2);
+  assert(2 != 3);
+  assert(3 > 2);
+  assert(2 < 3);
+  assert(3 >= 3);
+  assert(2 <= 3);
+
+  // Assign value to a
+  var a = 2, value, b;
+  //a = value;
+  // Assign value to b if b is null; otherwise, b stays the same
+  b ??= value;
+
+  a *= 3; // Assign and multiply: a = a * 3
+  assert(a == 6);
+
+  var done = false, col = 0;
+  if (!done && (col == 0 || col == 3)) {
+    // ...Do something...
+  }
+
+  final value1 = 0x22;
+  final bitmask = 0x0f;
+
+  assert((value1 & bitmask) == 0x02); // AND
+  assert((value1 & ~bitmask) == 0x20); // AND NOT
+  assert((value1 | bitmask) == 0x2f); // OR
+  assert((value1 ^ bitmask) == 0x2d); // XOR
+  assert((value1 << 4) == 0x220); // Shift left
+  assert((value1 >> 4) == 0x02); // Shift right
+//  assert((value1 >>> 4) == 0x02); // Unsigned shift right
+  assert((-value >> 4) == -0x03); // Shift right
+//  assert((-value >>> 4) > 0); // Unsigned shift right
+  var isPublic = true;
+  var visibility = isPublic ? 'public' : 'private';
+  print(visibility);
+}
+
+void ProcessControlTest() {
+  var message = StringBuffer('Dart is fun');
+  for (var i = 0; i < 5; i++) {
+    message.write('!');
+  }
 }
 
 void main() {
-  var year = DateTime.now().year;
-  print('now:' + (year / 100 + 1).round().toString());
+  variablesTest();
+  FunctionTest();
+  OperatorTest();
+  ProcessControlTest();
 }
