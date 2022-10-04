@@ -260,6 +260,7 @@ void OperatorTest() {
   var done = false, col = 0;
   if (!done && (col == 0 || col == 3)) {
     // ...Do something...
+    print("giao");
   }
 
   final value1 = 0x22;
